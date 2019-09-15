@@ -31,6 +31,7 @@ $(document).ready(function(){
 	}
 
 	function addMessage(message,self){
+		
 		var $messageContainer=$("<li/>")
 			.addClass('chat-message '+(self?'chat-message-self':'chat-message-friend'))
 			.appendTo($messagesList)
@@ -61,7 +62,9 @@ $(document).ready(function(){
 	}
 	function sendMessage(){
 		var message=$input.text();
+		var destino = $("#destino").val();
 		
+		alert(destino);
 		if(message=="") return;
 
 				 
@@ -77,60 +80,229 @@ $(document).ready(function(){
 	   
 	$('ul.infosugerencias').empty();
 
-
-	
-    $.ajax({
-        type: 'POST',
-        url: 'http://localhost:5005/webhooks/rest/webhook', //Acá pone la direccion a donde manda el msj q el usuario escribe
-		//url: 'http://localhost:5000/parser',
-		dataType: 'json',
-		contentType: 'application/json',
-		data: JSON.stringify( { "sender": "00001", "message": message } ),
-        success: function(respuesta) {
-			
-				/*
-				El formato para q mande los datos en json es:
-				 json_encode(array(
-							'mensaje' => 'ACÁ MANDA EL MENSAJE',
-							'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
-							'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
-							'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
-							
-						));
-				*/
-				if(respuesta !== ""){
-					respuestatxt = JSON.parse(JSON.stringify(respuesta));
-					
-					//var contenido = respuestatxt.mensaje.includes("chucha");
+	if(destino==1){ //MANDA POR DEFECTO A ESTE
+		
+		$.ajax({
+			type: 'POST',
+			url: 'http://localhost:5005/webhooks/rest/webhook', //Acá pone la direccion a donde manda el msj q el usuario escribe
+			//http://localhost:5005/webhooks/rest/webhook
+			//url: 'http://localhost:5000/parser',
+			dataType: 'json',
+			contentType: 'application/json',
+			data: JSON.stringify( { "sender": "00001", "message": message } ),
+			success: function(respuesta) {
+				
 					/*
-					var contenido = respuestatxt.message.includes("chucha");
-					if(contenido==true){
-						$(".chat-messages").css("background-image", "url(img/chucha.png)");
-						setTimeout(function(){ $(".chat-messages").css("background-image", "url(img/fondo.png)"); },3000);			
-					}
+					El formato para q mande los datos en json es:
+					 json_encode(array(
+								'mensaje' => 'ACÁ MANDA EL MENSAJE',
+								'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
+								'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
+								'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
+								
+							));
 					*/
-					//$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt.mensaje+"</div></li>");
-					$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt[0].text+"</div></li>");
-					
-					if(respuestatxt.sugerenciap!="" || respuestatxt.sugerencias!="" ||  respuestatxt.sugerenciat!="" ){
-						$('ul.infosugerencias').empty()
-						if(respuestatxt.sugerenciap!=""){
-							$("ul"). append("<li >"+respuestatxt.sugerenciap+"</li>");
+					if(respuesta !== ""){
+						respuestatxt = JSON.parse(JSON.stringify(respuesta));
+						
+						//var contenido = respuestatxt.mensaje.includes("chucha");
+						/*
+						var contenido = respuestatxt.message.includes("chucha");
+						if(contenido==true){
+							$(".chat-messages").css("background-image", "url(img/chucha.png)");
+							setTimeout(function(){ $(".chat-messages").css("background-image", "url(img/fondo.png)"); },3000);			
 						}
-						if(respuestatxt.sugerencias!=""){
-							$("ul"). append("<li >"+respuestatxt.sugerencias+"</li>");
-						}
-						if(respuestatxt.sugerenciat!=""){
-							$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
+						*/
+						//$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt.mensaje+"</div></li>");
+						$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt[0].text+"</div></li>");
+						
+						if(respuestatxt.sugerenciap!="" || respuestatxt.sugerencias!="" ||  respuestatxt.sugerenciat!="" ){
+							$('ul.infosugerencias').empty()
+							if(respuestatxt.sugerenciap!=""){
+								$("ul"). append("<li >"+respuestatxt.sugerenciap+"</li>");
+							}
+							if(respuestatxt.sugerencias!=""){
+								$("ul"). append("<li >"+respuestatxt.sugerencias+"</li>");
+							}
+							if(respuestatxt.sugerenciat!=""){
+								$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
+							}
 						}
 					}
-				}
-	
+		
+				
+			}
+		});
+		
+	}else{
+		if(destino==2){ //CAMBIE ACA EL DESTINO PA QUE MANDE AL DOCTOR
 			
-        }
-    });
-	
-
+			$.ajax({
+				type: 'POST',
+				url: 'http://localhost:5005/webhooks/rest/webhook', //Acá pone la direccion a donde manda el msj q el usuario escribe
+				//http://localhost:5005/webhooks/rest/webhook
+				//url: 'http://localhost:5000/parser',
+				dataType: 'json',
+				contentType: 'application/json',
+				data: JSON.stringify( { "sender": "00001", "message": message } ),
+				success: function(respuesta) {
+					
+						/*
+						El formato para q mande los datos en json es:
+						 json_encode(array(
+									'mensaje' => 'ACÁ MANDA EL MENSAJE',
+									'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
+									'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
+									'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
+									
+								));
+						*/
+						if(respuesta !== ""){
+							respuestatxt = JSON.parse(JSON.stringify(respuesta));
+							
+							//var contenido = respuestatxt.mensaje.includes("chucha");
+							/*
+							var contenido = respuestatxt.message.includes("chucha");
+							if(contenido==true){
+								$(".chat-messages").css("background-image", "url(img/chucha.png)");
+								setTimeout(function(){ $(".chat-messages").css("background-image", "url(img/fondo.png)"); },3000);			
+							}
+							*/
+							//$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt.mensaje+"</div></li>");
+							$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt[0].text+"</div></li>");
+							
+							if(respuestatxt.sugerenciap!="" || respuestatxt.sugerencias!="" ||  respuestatxt.sugerenciat!="" ){
+								$('ul.infosugerencias').empty()
+								if(respuestatxt.sugerenciap!=""){
+									$("ul"). append("<li >"+respuestatxt.sugerenciap+"</li>");
+								}
+								if(respuestatxt.sugerencias!=""){
+									$("ul"). append("<li >"+respuestatxt.sugerencias+"</li>");
+								}
+								if(respuestatxt.sugerenciat!=""){
+									$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
+								}
+							}
+						}
+			
+					
+				}
+			});
+			
+		}else{
+			if(destino==3){ //CAMBIE ACA EL DESTINO PA QUE MANDE AL IPS
+				
+				$.ajax({
+					type: 'POST',
+					url: 'http://localhost:5005/webhooks/rest/webhook', //Acá pone la direccion a donde manda el msj q el usuario escribe
+					//http://localhost:5005/webhooks/rest/webhook
+					//url: 'http://localhost:5000/parser',
+					dataType: 'json',
+					contentType: 'application/json',
+					data: JSON.stringify( { "sender": "00001", "message": message } ),
+					success: function(respuesta) {
+						
+							/*
+							El formato para q mande los datos en json es:
+							 json_encode(array(
+										'mensaje' => 'ACÁ MANDA EL MENSAJE',
+										'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
+										'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
+										'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
+										
+									));
+							*/
+							if(respuesta !== ""){
+								respuestatxt = JSON.parse(JSON.stringify(respuesta));
+								
+								//var contenido = respuestatxt.mensaje.includes("chucha");
+								/*
+								var contenido = respuestatxt.message.includes("chucha");
+								if(contenido==true){
+									$(".chat-messages").css("background-image", "url(img/chucha.png)");
+									setTimeout(function(){ $(".chat-messages").css("background-image", "url(img/fondo.png)"); },3000);			
+								}
+								*/
+								//$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt.mensaje+"</div></li>");
+								$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt[0].text+"</div></li>");
+								
+								if(respuestatxt.sugerenciap!="" || respuestatxt.sugerencias!="" ||  respuestatxt.sugerenciat!="" ){
+									$('ul.infosugerencias').empty()
+									if(respuestatxt.sugerenciap!=""){
+										$("ul"). append("<li >"+respuestatxt.sugerenciap+"</li>");
+									}
+									if(respuestatxt.sugerencias!=""){
+										$("ul"). append("<li >"+respuestatxt.sugerencias+"</li>");
+									}
+									if(respuestatxt.sugerenciat!=""){
+										$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
+									}
+								}
+							}
+				
+						
+					}
+				});
+				
+			}else{
+				if(destino==4){ //CAMBIE ACA EL DESTINO PA QUE MANDE AL RESTAURANTE
+					
+					$.ajax({
+						type: 'POST',
+						url: 'http://localhost:5005/webhooks/rest/webhook', //Acá pone la direccion a donde manda el msj q el usuario escribe
+						//http://localhost:5005/webhooks/rest/webhook
+						//url: 'http://localhost:5000/parser',
+						dataType: 'json',
+						contentType: 'application/json',
+						data: JSON.stringify( { "sender": "00001", "message": message } ),
+						success: function(respuesta) {
+							
+								/*
+								El formato para q mande los datos en json es:
+								 json_encode(array(
+											'mensaje' => 'ACÁ MANDA EL MENSAJE',
+											'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
+											'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
+											'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
+											
+										));
+								*/
+								if(respuesta !== ""){
+									respuestatxt = JSON.parse(JSON.stringify(respuesta));
+									
+									//var contenido = respuestatxt.mensaje.includes("chucha");
+									/*
+									var contenido = respuestatxt.message.includes("chucha");
+									if(contenido==true){
+										$(".chat-messages").css("background-image", "url(img/chucha.png)");
+										setTimeout(function(){ $(".chat-messages").css("background-image", "url(img/fondo.png)"); },3000);			
+									}
+									*/
+									//$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt.mensaje+"</div></li>");
+									$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt[0].text+"</div></li>");
+									
+									if(respuestatxt.sugerenciap!="" || respuestatxt.sugerencias!="" ||  respuestatxt.sugerenciat!="" ){
+										$('ul.infosugerencias').empty()
+										if(respuestatxt.sugerenciap!=""){
+											$("ul"). append("<li >"+respuestatxt.sugerenciap+"</li>");
+										}
+										if(respuestatxt.sugerencias!=""){
+											$("ul"). append("<li >"+respuestatxt.sugerencias+"</li>");
+										}
+										if(respuestatxt.sugerenciat!=""){
+											$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
+										}
+									}
+								}
+					
+							
+						}
+					});
+					
+				}						
+			}
+		}
+	}
 		lastMessage=message;
 
 		var messageElements=addMessage(message,true)
@@ -260,77 +432,7 @@ $(document).ready(function(){
 
 	}
 	
-	function friendIsTyping(){
-		if(isFriendTyping) return;
-
-		isFriendTyping=true;
-
-		var $dots=$("<div/>")
-			.addClass('chat-effect-dots')
-			.css({
-				top:-30+bleeding,
-				left:10
-			})
-			.appendTo($effectContainer)
-		;
-		for (var i = 0; i < 3; i++) {
-			var $dot=$("<div/>")
-				.addClass("chat-effect-dot")
-				.css({
-					left:i*20
-				})
-				.appendTo($dots)
-			;
-			TweenMax.to($dot,0.3,{
-				delay:-i*0.1,
-				y:30,
-				yoyo:true,
-				repeat:-1,
-				ease:Quad.easeInOut
-			})
-		};
-
-		var $info=$("<div/>")
-			.addClass("chat-info-typing")
-			.text("Your friend is typing...")
-			.css({
-				transform:"translate3d(0,30px,0)"
-			})
-			.appendTo($infoContainer)
-
-		TweenMax.to($info, 0.3,{
-			y:0,
-			force3D:true
-		});
-
-		gooOn();
-	}
-
-	function friendStoppedTyping(){
-		if(!isFriendTyping) return
-
-		isFriendTyping=false;
-
-		var $dots=$effectContainer.find(".chat-effect-dots");
-		TweenMax.to($dots,0.3,{
-			y:40,
-			force3D:true,
-			ease:Quad.easeIn,
-		});
-
-		var $info=$infoContainer.find(".chat-info-typing");
-		TweenMax.to($info,0.3,{
-			y:30,
-			force3D:true,
-			ease:Quad.easeIn,
-			onComplete:function(){
-				$dots.remove();
-				$info.remove();
-
-				gooOff();
-			}
-		});
-	}
+	
 	function receiveMessage(message){
 		var messageElements=addMessage(message,false)
 			,$messageContainer=messageElements.$container
