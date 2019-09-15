@@ -6,8 +6,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<title>chat</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/d0c14497d0.js"></script>
 </head>
 
 <body>
@@ -277,6 +278,91 @@ font-family: 'Oswald', sans-serif;
     margin: 5px 0 0 0;
 	cursor:pointer;
 }
+
+
+
+
+.caja_opciones_contexto{
+    position: absolute;
+    width: 280px;
+    z-index: 1000000;
+	bottom:10px;
+	display:none;
+}
+
+.caja_opciones_contexto ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+    background: #eee;
+    border-radius: 15px;
+}
+
+.caja_opciones_contexto ul li{
+    padding: 8px ;
+	border-bottom:1px solid #FFF;
+	cursor:pointer;
+}
+
+.caja_opciones_contexto ul li:last-child{
+	border-bottom:0px
+}
+
+.caja_opciones_contexto ul li i{
+	margin:0 10px 0 0;
+}
+
+.caja_opciones_contexto .opc_cancelar{
+	background: #eee;
+    text-align: center;
+    border-radius: 10px;
+    padding: 12px 0;
+    margin: 5px 0 0 0;
+	cursor:pointer;
+}
+
+
+
+.caja_opciones_lenguag{
+    position: absolute;
+    width: 280px;
+    z-index: 1000000;
+	bottom:10px;
+	display:none;
+}
+
+.caja_opciones_lenguag ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+    background: #eee;
+    border-radius: 15px;
+}
+
+.caja_opciones_lenguag ul li{
+    padding: 8px ;
+	border-bottom:1px solid #FFF;
+	cursor:pointer;
+}
+
+.caja_opciones_lenguag ul li:last-child{
+	border-bottom:0px
+}
+
+.caja_opciones_lenguag ul li i{
+	margin:0 10px 0 0;
+}
+
+.caja_opciones_lenguag .opc_cancelar{
+	background: #eee;
+    text-align: center;
+    border-radius: 10px;
+    padding: 12px 0;
+    margin: 5px 0 0 0;
+	cursor:pointer;
+}
+
+
 .cajasugerencias {
     min-height: 40px;
     width: 100%;
@@ -301,9 +387,27 @@ font-family: 'Oswald', sans-serif;
                     	<ul>
                         	<li><i class="fa fa-camera"></i>Camera</li>
                         	<li><i class="fa fa-image"></i>Photo</li>
-                        	<li><i class="fa fa-file-text"></i>Context</li>
+                        	<li class="bot_contexto"><i class="fa fa-file-text"></i>Context</li>
                         	<li><i class="fa fa-location-arrow"></i>Location</li>
-                        	<li><i class="fa fa-pencil"></i>Language</li>
+                        	<li class="bot_lenguag"><i class="fa fa-pencil"></i>Language</li>
+                        </ul>
+                        <div class="opc_cancelar">Cancel</div>
+                    </div>
+                	<div class="caja_opciones_contexto">
+                    	<ul>
+                        	<li class="d_doctor"><i class="fas fa-stethoscope"></i>Doctor</li>
+                        	<li class="d_isp"><i class="fas fa-phone-alt"></i>ISP</li>
+                        	<li class="d_restaurant"><i class="fas fa-utensils"></i>Restaurant</li>
+                        </ul>
+                        <div class="opc_cancelar">Cancel</div>
+                    </div>
+                	<div class="caja_opciones_lenguag">
+                    	<ul>
+                        	<li><i class="fas fa-globe-americas"></i>English</li>
+                        	<li><i class="fas fa-globe-americas"></i>Español</li>
+                        	<li><i class="fas fa-globe-americas"></i>Deutsch</li>
+                        	<li><i class="fas fa-globe-americas"></i>Poliski</li>
+                        	<li><i class="fas fa-globe-americas"></i>Italiano</li>
                         </ul>
                         <div class="opc_cancelar">Cancel</div>
                     </div>
@@ -333,6 +437,7 @@ font-family: 'Oswald', sans-serif;
 					</div>
 				</div>
 			</div>
+            <input type="hidden" id="destino" value="1"/>
 			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="800">
 			  <defs>
 			    <filter id="goo">
@@ -344,16 +449,41 @@ font-family: 'Oswald', sans-serif;
 			</svg>
 			
 		</div><!-- /container -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/TweenMax.min.js"></script>
-		<script src="js/chat.js"></script>
+		<script src="jquery.min.js"></script>
+		<script src="TweenMax.min.js"></script>
+		<script src="chat.js"></script>
         <script>
-$(".opc_cancelar").click(function(){
-  $(".caja_opciones").hide();
-});		
-$(".botonmas").click(function(){
-  $(".caja_opciones").show();
-});		
+			$(".opc_cancelar").click(function(){
+			  $(".caja_opciones").hide();
+			  $(".caja_opciones_lenguag").hide();
+			  $(".caja_opciones_contexto").hide();
+			});		
+			$(".botonmas").click(function(){
+			  $(".caja_opciones").show();
+			});	
+			$(".bot_lenguag").click(function(){
+			  $(".caja_opciones").hide();
+			  $(".caja_opciones_lenguag").show();
+			});
+			$(".bot_contexto").click(function(){
+			  $(".caja_opciones").hide();
+			  $(".caja_opciones_contexto").show();
+			});		
+			
+			$(".d_doctor").click(function(){
+				$("#destino").val("2");
+			});		
+			
+			$(".d_isp").click(function(){
+				$("#destino").val("3");
+			});		
+			
+			$(".d_doctor").click(function(){
+				$("#d_restaurant").val("3");
+			});	
+			
+			
+
 		</script>
         
 </body>
