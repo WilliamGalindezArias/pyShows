@@ -99,6 +99,7 @@ $(document).ready(function(){
 								'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
 								'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
 								'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
+								'image' => 'ACÁ MANDA EL LINK DE LA IMAGEN',
 								
 							));
 					*/
@@ -128,6 +129,12 @@ $(document).ready(function(){
 								$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
 							}
 						}
+						
+						if(respuestatxt.image!= null && respuestatxt.image!= undefined ){
+							
+						$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\"><img  class=\"imagenchat\" src=\""+respuestatxt.image+"\"></div></li>");
+							
+						}
 					}
 		
 				
@@ -154,6 +161,7 @@ $(document).ready(function(){
 									'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
 									'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
 									'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
+									'image' => 'ACÁ MANDA EL LINK DE LA IMAGEN',
 									
 								));
 						*/
@@ -183,7 +191,13 @@ $(document).ready(function(){
 									$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
 								}
 							}
+							if(respuestatxt.image!= null && respuestatxt.image!= undefined ){
+								
+							$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\"><img  class=\"imagenchat\" src=\""+respuestatxt.image+"\"></div></li>");
+								
+							}
 						}
+						
 			
 					
 				}
@@ -209,6 +223,7 @@ $(document).ready(function(){
 										'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
 										'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
 										'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
+										'image' => 'ACÁ MANDA EL LINK DE LA IMAGEN',
 										
 									));
 							*/
@@ -238,6 +253,13 @@ $(document).ready(function(){
 										$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
 									}
 								}
+
+					
+								if(respuestatxt.image!= null && respuestatxt.image!= undefined ){
+									
+								$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\"><img  class=\"imagenchat\" src=\""+respuestatxt.image+"\"></div></li>");
+									
+								}								
 							}
 				
 						
@@ -264,10 +286,11 @@ $(document).ready(function(){
 											'sugerenciap' => 'ACÁ MANDA LA PRIMERA SUGERENCIA',
 											'sugerencias' => 'ACÁ MANDA LA SEGUNDA SUGERENCIA',
 											'sugerenciat' => 'ACÁ MANDA LA TERCERA SUGERENCIA',
+											'image' => 'ACÁ MANDA EL LINK DE LA IMAGEN',
 											
 										));
 								*/
-								if(respuesta !== ""){
+								if(respuesta !== undefined && respuesta !== null){
 									respuestatxt = JSON.parse(JSON.stringify(respuesta));
 									
 									//var contenido = respuestatxt.mensaje.includes("chucha");
@@ -281,18 +304,24 @@ $(document).ready(function(){
 									//$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt.mensaje+"</div></li>");
 									$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\">"+respuestatxt[0].text+"</div></li>");
 									
-									if(respuestatxt.sugerenciap!="" || respuestatxt.sugerencias!="" ||  respuestatxt.sugerenciat!="" ){
+									if(respuestatxt.sugerenciap!= null || respuestatxt.sugerencias!= null ||  respuestatxt.sugerenciat!= null ){
 										$('ul.infosugerencias').empty()
-										if(respuestatxt.sugerenciap!=""){
+										if(respuestatxt.sugerenciap!= null){
 											$("ul"). append("<li >"+respuestatxt.sugerenciap+"</li>");
 										}
-										if(respuestatxt.sugerencias!=""){
+										if(respuestatxt.sugerencias!= null){
 											$("ul"). append("<li >"+respuestatxt.sugerencias+"</li>");
 										}
-										if(respuestatxt.sugerenciat!=""){
+										if(respuestatxt.sugerenciat!= null){
 											$("ul"). append("<li >"+respuestatxt.sugerenciat+"</li>");
 										}
 									}
+
+									if(respuestatxt.image!= null && respuestatxt.image!= undefined ){ 
+										
+									$("ol"). append("<li class=\"chat-message chat-message-friend\"><div class=\"chat-message-bubble\"><img  class=\"imagenchat\" src=\""+respuestatxt.image+"\"></div></li>");
+										
+									}									
 								}
 					
 							

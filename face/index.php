@@ -380,6 +380,10 @@ font-family: 'Oswald', sans-serif;
     font-size: 14px;
 	vertical-align:middle;
 }
+
+img.imagenchat {
+    max-width: 100%;
+}
 </style>
 			<div class="content">
 				<div class="chat-window">
@@ -449,9 +453,9 @@ font-family: 'Oswald', sans-serif;
 			</svg>
 			
 		</div><!-- /container -->
-		<script src="jquery.min.js"></script>
-		<script src="TweenMax.min.js"></script>
-		<script src="chat.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/TweenMax.min.js"></script>
+		<script src="js/chat.js"></script>
         <script>
 			$(".opc_cancelar").click(function(){
 			  $(".caja_opciones").hide();
